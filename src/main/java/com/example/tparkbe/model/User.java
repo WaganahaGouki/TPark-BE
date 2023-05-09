@@ -20,4 +20,6 @@ public class User implements Serializable {
     private String username;
     private String email;
     private String password;
+    @Column(nullable = false, updatable = false)
+    private UUID userCode;
 }

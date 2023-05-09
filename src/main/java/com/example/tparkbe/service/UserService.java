@@ -20,6 +20,7 @@ public class UserService {
     }
 
     public User addUser(User user) {
+        user.setUserCode(UUID.randomUUID());
         return userRepo.save(user);
     }
 
