@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -20,6 +19,10 @@ public class User implements Serializable {
     private String username;
     private String email;
     private String password;
-    @Column(nullable = false, updatable = false)
-    private UUID userCode;
+
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 }
