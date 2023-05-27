@@ -3,22 +3,17 @@ package com.example.tparkbe.service;
 import com.example.tparkbe.exception.UserNotFoundException;
 import com.example.tparkbe.model.User;
 import com.example.tparkbe.repo.UserRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class UserService {
     private final UserRepo userRepo;
-
-    private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-
-    @Autowired
-    public UserService(UserRepo userRepo) {
-        this.userRepo = userRepo;
-    }
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public User addUser(User user) {
         boolean userExists = userRepo
@@ -28,7 +23,6 @@ public class UserService {
             throw new IllegalStateException("Email already taken!");
         }
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
-        System.out.println(encodedPassword);
         user.setPassword(encodedPassword);
         return userRepo.save(user);
     }
