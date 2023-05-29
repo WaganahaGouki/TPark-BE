@@ -11,9 +11,9 @@ import javax.transaction.Transactional;
 @Transactional
 @AllArgsConstructor
 public class RegisterService {
-
     private final UserService userService;
     private final EmailValidator emailValidator;
+
     public User register(Register request) {
         boolean isValidEmail = emailValidator.test(request.getEmail());
         if (!isValidEmail) {

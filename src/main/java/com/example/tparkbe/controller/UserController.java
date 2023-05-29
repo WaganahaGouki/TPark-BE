@@ -2,6 +2,7 @@ package com.example.tparkbe.controller;
 
 import com.example.tparkbe.model.User;
 import com.example.tparkbe.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,13 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping("/all")
     public ResponseEntity<List<User>> getAllUsers() {
