@@ -39,6 +39,13 @@ public class UserController {
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
+    @PostMapping("/add/role")
+    public ResponseEntity<User> addRoleToUser(@RequestBody String username, String roleName) {
+        User user = userService.findUserByUsername(username);
+        userService.addRoleToUser(user.getUsername(), roleName);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
     @PutMapping("/update")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         User updateUser = userService.updateUser(user);

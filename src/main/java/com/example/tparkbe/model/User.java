@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @Getter
@@ -19,6 +21,8 @@ public class User implements Serializable {
     private String username;
     private String email;
     private String password;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Role> roles = new ArrayList<>();
 
     public User(String username, String email, String password) {
         this.username = username;

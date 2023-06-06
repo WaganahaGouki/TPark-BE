@@ -1,7 +1,9 @@
 package com.example.tparkbe.service;
 
 import com.example.tparkbe.exception.UserNotFoundException;
+import com.example.tparkbe.model.Role;
 import com.example.tparkbe.model.User;
+import com.example.tparkbe.repo.RoleRepo;
 import com.example.tparkbe.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepo userRepo;
+    private final RoleRepo roleRepo;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public User addUser(User user) {
@@ -25,6 +28,12 @@ public class UserService {
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         return userRepo.save(user);
+    }
+
+    public void addRoleToUser(String username, String roleName) {
+        User user = userRepo.findUserByUsername(username);
+        Role role = roleRepo.findByName(roleName);
+        user.getRoles().add(role);
     }
 
     public User updateUser(User user) {
@@ -53,6 +62,10 @@ public class UserService {
 
     public User findUserById(Long id) {
         return userRepo.findUserById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found!"));
+    }
+
+    public User findUserByUsername(String username) {
+        return userRepo.findUserByUsername(username);
     }
 
     public User findUserByEmail(String email) {
