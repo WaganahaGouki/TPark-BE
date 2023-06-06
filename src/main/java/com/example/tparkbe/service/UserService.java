@@ -3,14 +3,14 @@ package com.example.tparkbe.service;
 import com.example.tparkbe.exception.UserNotFoundException;
 import com.example.tparkbe.model.User;
 import com.example.tparkbe.repo.UserRepo;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserService {
     private final UserRepo userRepo;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;

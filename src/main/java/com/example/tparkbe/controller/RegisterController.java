@@ -3,17 +3,17 @@ package com.example.tparkbe.controller;
 import com.example.tparkbe.model.Register;
 import com.example.tparkbe.model.User;
 import com.example.tparkbe.service.RegisterService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping(path = "/register")
 public class RegisterController {
-    private RegisterService registerService;
+    private final RegisterService registerService;
 
     @PostMapping()
     public User register(@RequestBody Register request) {
