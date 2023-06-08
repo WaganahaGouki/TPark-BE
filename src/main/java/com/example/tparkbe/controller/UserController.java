@@ -1,5 +1,6 @@
 package com.example.tparkbe.controller;
 
+import com.example.tparkbe.model.Role;
 import com.example.tparkbe.model.User;
 import com.example.tparkbe.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -31,6 +33,13 @@ public class UserController {
     public ResponseEntity<User> getUserByEmail(@PathVariable("email") String email) {
         User user = userService.findUserByEmail(email);
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @GetMapping("/role/{email}")
+    public ResponseEntity<Collection<Role>> getUserRolesByEmail(@PathVariable("email") String email) {
+        User user = userService.findUserByEmail(email);
+        Collection<Role> role = user.getRoles();
+        return new ResponseEntity<>(role, HttpStatus.OK);
     }
 
     @PostMapping("/add")
