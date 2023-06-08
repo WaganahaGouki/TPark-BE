@@ -27,13 +27,21 @@ public class UserService {
         }
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
+        Role role = roleRepo.findByName("USER");
+        user.getRoles().add(role);
         return userRepo.save(user);
     }
 
-    public void addRoleToUser(String username, String roleName) {
-        User user = userRepo.findUserByUsername(username);
+    public User addRoleToUser(User user, String roleName) {
+        boolean userExists = userRepo
+                .findUserByUsername(user.getUsername())
+                .isPresent();
+        if(!userExists) {
+            throw new IllegalStateException("User doesn't exist!");
+        }
         Role role = roleRepo.findByName(roleName);
         user.getRoles().add(role);
+        return userRepo.save(user);
     }
 
     public User updateUser(User user) {
@@ -65,7 +73,7 @@ public class UserService {
     }
 
     public User findUserByUsername(String username) {
-        return userRepo.findUserByUsername(username);
+        return userRepo.findUserByUsername(username).orElseThrow(() -> new UserNotFoundException("User by id " + username + " was not found!"));
     }
 
     public User findUserByEmail(String email) {
