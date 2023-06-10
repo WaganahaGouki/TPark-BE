@@ -33,6 +33,16 @@ public class ParkingLotService {
         return parkingLotRepo.save(parkingLot);
     }
 
+    public void deleteParkingLot(Long id) {
+        boolean parkingLotExists = parkingLotRepo
+                .findParkingLotById(id)
+                .isPresent();
+        if(!parkingLotExists) {
+            throw new IllegalStateException("Parking lot doesn't exist!");
+        }
+        parkingLotRepo.deleteParkingLotById(id);
+    }
+
     public List<ParkingLot> findAllParkingLots() {
         return parkingLotRepo.findAll();
     }

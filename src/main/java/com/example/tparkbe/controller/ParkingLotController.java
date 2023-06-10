@@ -44,4 +44,10 @@ public class ParkingLotController {
         ParkingLot updateParkingLot = parkingLotService.updateParkingLot(parkingLot);
         return new ResponseEntity<>(updateParkingLot, HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteParkingLot(@PathVariable("id") Long id) {
+        parkingLotService.deleteParkingLot(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
