@@ -1,6 +1,6 @@
 package com.example.tparkbe.service;
 
-import com.example.tparkbe.exception.UserNotFoundException;
+import com.example.tparkbe.exception.NotFoundException;
 import com.example.tparkbe.model.Role;
 import com.example.tparkbe.model.User;
 import com.example.tparkbe.repo.RoleRepo;
@@ -69,14 +69,14 @@ public class UserService {
     }
 
     public User findUserById(Long id) {
-        return userRepo.findUserById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found!"));
+        return userRepo.findUserById(id).orElseThrow(() -> new NotFoundException("User by id " + id + " was not found!"));
     }
 
     public User findUserByUsername(String username) {
-        return userRepo.findUserByUsername(username).orElseThrow(() -> new UserNotFoundException("User by username " + username + " was not found!"));
+        return userRepo.findUserByUsername(username).orElseThrow(() -> new NotFoundException("User by username " + username + " was not found!"));
     }
 
     public User findUserByEmail(String email) {
-        return userRepo.findUserByEmail(email).orElseThrow(() -> new UserNotFoundException("User by email " + email + " was not found!"));
+        return userRepo.findUserByEmail(email).orElseThrow(() -> new NotFoundException("User by email " + email + " was not found!"));
     }
 }

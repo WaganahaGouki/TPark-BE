@@ -1,6 +1,6 @@
 package com.example.tparkbe.service;
 
-import com.example.tparkbe.exception.UserNotFoundException;
+import com.example.tparkbe.exception.NotFoundException;
 import com.example.tparkbe.model.ParkingLot;
 import com.example.tparkbe.repo.ParkingLotRepo;
 import lombok.RequiredArgsConstructor;
@@ -38,10 +38,10 @@ public class ParkingLotService {
     }
 
     public ParkingLot findParkingLotByName(String name) {
-        return parkingLotRepo.findParkingLotByName(name).orElseThrow(() -> new UserNotFoundException("Parking lot by name " + name + " was not found!"));
+        return parkingLotRepo.findParkingLotByName(name).orElseThrow(() -> new NotFoundException("Parking lot by name " + name + " was not found!"));
     }
 
     public ParkingLot findParkingLotById(Long id) {
-        return parkingLotRepo.findParkingLotById(id).orElseThrow(() -> new UserNotFoundException("Parking lot by id " + id + " was not found!"));
+        return parkingLotRepo.findParkingLotById(id).orElseThrow(() -> new NotFoundException("Parking lot by id " + id + " was not found!"));
     }
 }
