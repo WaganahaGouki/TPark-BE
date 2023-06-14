@@ -20,7 +20,7 @@ public class UserService {
 
     public User addUser(User user) {
         boolean userExists = userRepo
-                .findUserByEmail(user.getEmail())
+                .findByEmail(user.getEmail())
                 .isPresent();
         if(userExists) {
             throw new IllegalStateException("Email already taken!");
@@ -34,7 +34,7 @@ public class UserService {
 
     public User addRoleToUser(User user, String roleName) {
         boolean userExists = userRepo
-                .findUserByUsername(user.getUsername())
+                .findByEmail(user.getEmail())
                 .isPresent();
         if(!userExists) {
             throw new IllegalStateException("User doesn't exist!");
@@ -76,7 +76,7 @@ public class UserService {
         return userRepo.findUserByUsername(username).orElseThrow(() -> new NotFoundException("User by username " + username + " was not found!"));
     }
 
-    public User findUserByEmail(String email) {
-        return userRepo.findUserByEmail(email).orElseThrow(() -> new NotFoundException("User by email " + email + " was not found!"));
+    public User findByEmail(String email) {
+        return userRepo.findByEmail(email).orElseThrow(() -> new NotFoundException("User by email " + email + " was not found!"));
     }
 }

@@ -31,13 +31,13 @@ public class UserController {
 
     @GetMapping("/find/email/{email}")
     public ResponseEntity<User> getUserByEmail(@PathVariable("email") String email) {
-        User user = userService.findUserByEmail(email);
+        User user = userService.findByEmail(email);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @GetMapping("/role/{email}")
     public ResponseEntity<Collection<Role>> getUserRolesByEmail(@PathVariable("email") String email) {
-        User user = userService.findUserByEmail(email);
+        User user = userService.findByEmail(email);
         Collection<Role> role = user.getRoles();
         return new ResponseEntity<>(role, HttpStatus.OK);
     }
@@ -48,9 +48,9 @@ public class UserController {
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
-    @PostMapping("/add/role")
-    public ResponseEntity<User> addRoleToUser(@RequestBody String username, String roleName) {
-        User user = userService.findUserByUsername(username);
+    @PostMapping("/add/role/{email}/{roleName}")
+    public ResponseEntity<User> addRoleToUser(@PathVariable("email") String email, @PathVariable("roleName") String roleName) {
+        User user = userService.findByEmail(email);
         userService.addRoleToUser(user, roleName);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
