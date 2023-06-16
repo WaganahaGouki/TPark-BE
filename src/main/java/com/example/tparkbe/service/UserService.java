@@ -27,8 +27,6 @@ public class UserService {
         }
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-        Role role = roleRepo.findRoleByName("USER");
-        user.getRoles().add(role);
         return userRepo.save(user);
     }
 
@@ -40,7 +38,7 @@ public class UserService {
             throw new IllegalStateException("User doesn't exist!");
         }
         Role role = roleRepo.findRoleByName(roleName);
-        user.getRoles().add(role);
+        user.setRole(role);
         return userRepo.save(user);
     }
 

@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -36,9 +35,9 @@ public class UserController {
     }
 
     @GetMapping("/role/{email}")
-    public ResponseEntity<Collection<Role>> getUserRolesByEmail(@PathVariable("email") String email) {
+    public ResponseEntity<Role> getUserRoleByEmail(@PathVariable("email") String email) {
         User user = userService.findByEmail(email);
-        Collection<Role> role = user.getRoles();
+        Role role = user.getRole();
         return new ResponseEntity<>(role, HttpStatus.OK);
     }
 
