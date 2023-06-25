@@ -14,5 +14,5 @@ public interface ParkingLotRequestRepo extends JpaRepository<ParkingLotRequest, 
 
     Optional<ParkingLotRequest> findParkingLotRequestById(Long id);
 
-    void deleteParkingLotRequestById(Long id);
+    void deleteParkingLotRequestByName(String name);
 }

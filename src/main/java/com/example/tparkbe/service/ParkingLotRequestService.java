@@ -17,14 +17,14 @@ public class ParkingLotRequestService {
         return parkingLotRequestRepo.save(parkingLotRequest);
     }
 
-    public void deleteParkingLotRequest(Long id) {
+    public void deleteParkingLotRequest(String name) {
         boolean parkingLotRequestExists = parkingLotRequestRepo
-                .findParkingLotRequestById(id)
+                .findParkingLotRequestByName(name)
                 .isPresent();
         if(!parkingLotRequestExists) {
             throw new IllegalStateException("Parking lot request doesn't exist!");
         }
-        parkingLotRequestRepo.deleteParkingLotRequestById(id);
+        parkingLotRequestRepo.deleteParkingLotRequestByName(name);
     }
 
     public List<ParkingLotRequest> findAllParkingLotRequests() {

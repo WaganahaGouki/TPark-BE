@@ -39,9 +39,9 @@ public class ParkingLotRequestController {
         return new ResponseEntity<>(newParkingLotRequest, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteParkingLotRequest(@PathVariable("id") Long id) {
-        parkingLotRequestService.deleteParkingLotRequest(id);
+    @DeleteMapping("/delete/{name}")
+    public ResponseEntity<?> deleteParkingLotRequest(@PathVariable("name") String name) {
+        parkingLotRequestService.deleteParkingLotRequest(name);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
