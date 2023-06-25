@@ -33,14 +33,14 @@ public class ParkingLotService {
         return parkingLotRepo.save(parkingLot);
     }
 
-    public void deleteParkingLot(Long id) {
+    public void deleteParkingLot(String name) {
         boolean parkingLotExists = parkingLotRepo
-                .findParkingLotById(id)
+                .findParkingLotByName(name)
                 .isPresent();
         if(!parkingLotExists) {
             throw new IllegalStateException("Parking lot doesn't exist!");
         }
-        parkingLotRepo.deleteParkingLotById(id);
+        parkingLotRepo.deleteParkingLotByName(name);
     }
 
     public List<ParkingLot> findAllParkingLots() {
