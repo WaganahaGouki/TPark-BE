@@ -49,6 +49,8 @@ public class UserService {
         if(!userExists) {
             throw new IllegalStateException("User doesn't exist!");
         }
+        String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         return userRepo.save(user);
     }
 

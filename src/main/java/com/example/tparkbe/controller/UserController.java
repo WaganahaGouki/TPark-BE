@@ -54,8 +54,12 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<User> updateUser(@RequestBody User user) {
+    @PutMapping("/update/{email}/{newUsername}/{newEmail}/{newPassword}")
+    public ResponseEntity<User> updateUser(@PathVariable("email") String email, @PathVariable("newUsername") String newUsername, @PathVariable("newEmail") String newEmail, @PathVariable("newPassword") String newPassword) {
+        User user = userService.findByEmail(email);
+        user.setUsername(newUsername);
+        user.setEmail(newEmail);
+        user.setPassword(newPassword);
         User updateUser = userService.updateUser(user);
         return new ResponseEntity<>(updateUser, HttpStatus.OK);
     }

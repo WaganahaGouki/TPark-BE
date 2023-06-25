@@ -39,8 +39,16 @@ public class ParkingLotController {
         return new ResponseEntity<>(newParkingLot, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<ParkingLot> updateParkingLot(@RequestBody ParkingLot parkingLot) {
+    @PutMapping("/update/{name}/{newZone}/{newLat}/{newLng}/{newCarSlots}/{newBusSlots}/{newHandicapSlots}/{newPricePerHour}")
+    public ResponseEntity<ParkingLot> updateParkingLot(@PathVariable("name") String name, @PathVariable("newZone") String newZone, @PathVariable("newLat") double newLat, @PathVariable("newLng") double newLng, @PathVariable("newCarSlots") int newCarSlots, @PathVariable("newBusSlots") int newBusSlots, @PathVariable("newHandicapSlots") int newHandicapSlots, @PathVariable("newPricePerHour") int newPricePerHour) {
+        ParkingLot parkingLot = parkingLotService.findParkingLotByName(name);
+        parkingLot.setZone(newZone);
+        parkingLot.setLat(newLat);
+        parkingLot.setLng(newLng);
+        parkingLot.setCarSlots(newCarSlots);
+        parkingLot.setBusSlots(newBusSlots);
+        parkingLot.setHandicapSlots(newHandicapSlots);
+        parkingLot.setPricePerHour(newPricePerHour);
         ParkingLot updateParkingLot = parkingLotService.updateParkingLot(parkingLot);
         return new ResponseEntity<>(updateParkingLot, HttpStatus.OK);
     }
